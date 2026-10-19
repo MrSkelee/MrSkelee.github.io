@@ -1,25 +1,33 @@
 /* Modern Developer Portfolio CSS Design System */
 
-:root {
-    /* Color Palette */
-    --bg-main: #040408;
-    --bg-darker: #020204;
+:root, [data-theme="emerald"] {
+    /* Color Palette: Cyber Emerald & Electric Cyan (Default) */
+    --bg-main: #05080c;
+    --bg-darker: #020406;
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
     
     /* Neon Accents */
-    --accent-purple: hsl(263, 85%, 65%);
-    --accent-indigo: hsl(220, 90%, 60%);
-    --accent-indigo-rgb: 99, 102, 241;
-    --accent-pink: hsl(320, 85%, 60%);
-    --accent-emerald: hsl(150, 80%, 45%);
+    --accent-primary: #10b981;
+    --accent-secondary: #06b6d4;
+    --accent-purple: #10b981;
+    --accent-indigo: #06b6d4;
+    --accent-indigo-rgb: 6, 182, 212;
+    --accent-pink: #10b981;
+    --accent-emerald: #10b981;
+    
+    --accent-glow-1: rgba(16, 185, 129, 0.32);
+    --accent-glow-2: rgba(6, 182, 212, 0.28);
+    --accent-glow-3: rgba(16, 185, 129, 0.15);
+    --card-border-glow: rgba(16, 185, 129, 0.35);
+    --theme-gradient: linear-gradient(135deg, #10b981, #06b6d4);
     
     /* Glassmorphism Constants */
-    --glass-bg: rgba(10, 10, 20, 0.45);
-    --glass-border: rgba(255, 255, 255, 0.06);
-    --glass-border-hover: rgba(255, 255, 255, 0.15);
-    --glass-shadow: rgba(0, 0, 0, 0.4);
+    --glass-bg: rgba(7, 12, 18, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.07);
+    --glass-border-hover: rgba(16, 185, 129, 0.3);
+    --glass-shadow: rgba(0, 0, 0, 0.5);
     
     /* Typography */
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -28,6 +36,90 @@
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+[data-theme="sunset"] {
+    /* Color Palette: Sunset Violet & Solar Amber */
+    --bg-main: #08070e;
+    --bg-darker: #040307;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --accent-primary: #8b5cf6;
+    --accent-secondary: #f97316;
+    --accent-purple: #8b5cf6;
+    --accent-indigo: #f97316;
+    --accent-indigo-rgb: 249, 115, 22;
+    --accent-pink: #ec4899;
+    --accent-emerald: #10b981;
+    
+    --accent-glow-1: rgba(139, 92, 246, 0.32);
+    --accent-glow-2: rgba(249, 115, 22, 0.26);
+    --accent-glow-3: rgba(236, 72, 153, 0.15);
+    --card-border-glow: rgba(139, 92, 246, 0.35);
+    --theme-gradient: linear-gradient(135deg, #8b5cf6, #f97316);
+    
+    --glass-bg: rgba(13, 10, 22, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.07);
+    --glass-border-hover: rgba(139, 92, 246, 0.3);
+    --glass-shadow: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="sapphire"] {
+    /* Color Palette: Deep Sapphire & Electric Lavender */
+    --bg-main: #040714;
+    --bg-darker: #02030a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --accent-primary: #3b82f6;
+    --accent-secondary: #a855f7;
+    --accent-purple: #3b82f6;
+    --accent-indigo: #a855f7;
+    --accent-indigo-rgb: 59, 130, 246;
+    --accent-pink: #c084fc;
+    --accent-emerald: #10b981;
+    
+    --accent-glow-1: rgba(37, 99, 235, 0.32);
+    --accent-glow-2: rgba(168, 85, 247, 0.28);
+    --accent-glow-3: rgba(99, 102, 241, 0.15);
+    --card-border-glow: rgba(59, 130, 246, 0.35);
+    --theme-gradient: linear-gradient(135deg, #3b82f6, #a855f7);
+    
+    --glass-bg: rgba(8, 12, 26, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.07);
+    --glass-border-hover: rgba(59, 130, 246, 0.3);
+    --glass-shadow: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="crimson"] {
+    /* Color Palette: Crimson Ruby & Burnished Amber */
+    --bg-main: #090607;
+    --bg-darker: #040203;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --accent-primary: #ef4444;
+    --accent-secondary: #f59e0b;
+    --accent-purple: #ef4444;
+    --accent-indigo: #f59e0b;
+    --accent-indigo-rgb: 239, 68, 68;
+    --accent-pink: #f43f5e;
+    --accent-emerald: #10b981;
+    
+    --accent-glow-1: rgba(239, 68, 68, 0.32);
+    --accent-glow-2: rgba(245, 158, 11, 0.26);
+    --accent-glow-3: rgba(244, 63, 94, 0.15);
+    --card-border-glow: rgba(239, 68, 68, 0.35);
+    --theme-gradient: linear-gradient(135deg, #ef4444, #f59e0b);
+    
+    --glass-bg: rgba(18, 9, 11, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.07);
+    --glass-border-hover: rgba(239, 68, 68, 0.3);
+    --glass-shadow: rgba(0, 0, 0, 0.5);
 }
 
 /* Reset and Global Styles */
@@ -81,36 +173,37 @@ body {
 .glow {
     position: absolute;
     border-radius: 50%;
-    filter: blur(130px);
-    opacity: 0.22;
+    filter: blur(140px);
+    opacity: 0.35;
     mix-blend-mode: screen;
+    transition: background 0.8s ease;
 }
 
 .glow-1 {
-    width: 45vw;
-    height: 45vw;
-    background: var(--accent-purple);
-    top: -10vw;
+    width: 48vw;
+    height: 48vw;
+    background: var(--accent-glow-1);
+    top: -12vw;
     right: -10vw;
     animation: glow-pulse-1 12s infinite alternate ease-in-out;
 }
 
 .glow-2 {
-    width: 50vw;
-    height: 50vw;
-    background: var(--accent-indigo);
+    width: 52vw;
+    height: 52vw;
+    background: var(--accent-glow-2);
     bottom: -15vw;
     left: -15vw;
     animation: glow-pulse-2 15s infinite alternate-reverse ease-in-out;
 }
 
 .glow-3 {
-    width: 35vw;
-    height: 35vw;
-    background: var(--accent-pink);
+    width: 38vw;
+    height: 38vw;
+    background: var(--accent-glow-3);
     top: 30vh;
     left: 20vw;
-    opacity: 0.12;
+    opacity: 0.20;
     animation: glow-pulse-3 18s infinite alternate ease-in-out;
 }
 
@@ -461,6 +554,7 @@ body {
 /* Sections Global */
 .section {
     padding: 100px 0;
+    scroll-margin-top: 100px;
 }
 
 .section-header {
@@ -632,7 +726,8 @@ body {
     border-radius: 6px;
 }
 
-.project-link {
+.project-link,
+.project-link:visited {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -645,7 +740,10 @@ body {
     padding-bottom: 2px;
     margin-top: auto;
     position: relative;
-    z-index: 1;
+    z-index: 30;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .project-link i {
@@ -653,10 +751,21 @@ body {
     height: 14px;
 }
 
-.project-link:hover {
-    color: var(--accent-indigo);
-    border-color: var(--accent-indigo);
+.project-link:hover,
+.project-link:focus,
+.project-link:active {
+    color: var(--accent-primary) !important;
+    border-color: var(--accent-primary) !important;
+    text-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
     gap: 12px;
+    outline: none;
+}
+
+.sphere-card .project-link {
+    cursor: pointer;
+    position: relative;
+    z-index: 50;
+    pointer-events: auto;
 }
 
 /* Skills Section */
@@ -954,4 +1063,234 @@ footer strong {
 .fade-in-visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ==========================================================================
+   CONTACT ICONS SVG ENHANCEMENTS
+   ========================================================================== */
+.contact-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: currentColor;
+    display: block;
+}
+
+.contact-icon.telegram {
+    background: linear-gradient(135deg, #0284c7, #38bdf8);
+    box-shadow: 0 4px 18px rgba(56, 189, 248, 0.35);
+    color: #ffffff;
+}
+
+.contact-icon.github {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    border: 1px solid rgba(16, 185, 129, 0.5);
+    box-shadow: 0 4px 18px rgba(16, 185, 129, 0.25);
+    color: var(--accent-primary);
+}
+
+.contact-icon.youtube {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    box-shadow: 0 4px 18px rgba(239, 68, 68, 0.35);
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   🌐 3D SPHERICAL PROJECT SHOWCASE (Real Projects in 3D Cyber Dome Space)
+   ========================================================================== */
+.project-sphere-section {
+    padding: 35px 0 25px;
+    position: relative;
+    background: transparent;
+}
+
+.project-sphere-stage {
+    position: relative;
+    width: 100%;
+    height: 640px;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    background: transparent;
+}
+
+.project-sphere-stage.is-dragging {
+    cursor: grabbing;
+}
+
+.sphere-cinema-portal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 680px;
+    height: 680px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, rgba(6, 182, 212, 0.06) 45%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(55px);
+    transition: opacity 0.2s ease-out;
+}
+
+.sphere-world {
+    position: absolute;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.sphere-card {
+    position: absolute;
+    width: 350px;
+    left: -175px;
+    top: -190px;
+    margin: 0;
+    transform-origin: 50% 50%;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: rgba(8, 20, 15, 0.94);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.sphere-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: #f8fafc;
+    word-break: break-word;
+}
+
+.sphere-card p {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: #94a3b8;
+    margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sphere-card .tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.sphere-card .tech-badges span {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 6px;
+    color: #6ee7b7;
+}
+
+.sphere-card.is-front {
+    border-color: rgba(16, 185, 129, 0.9);
+    box-shadow: 0 0 35px rgba(16, 185, 129, 0.45), 0 20px 45px rgba(0, 0, 0, 0.85);
+    z-index: 10;
+    opacity: 1;
+}
+
+.sphere-card:not(.is-front) {
+    opacity: 0.45;
+}
+
+.sphere-card:not(.is-front):hover {
+    opacity: 0.85;
+    border-color: rgba(16, 185, 129, 0.5);
+}
+
+@media (max-width: 768px) {
+    .project-sphere-stage {
+        height: 540px;
+        perspective: 900px;
+    }
+    .sphere-card {
+        width: 290px;
+        left: -145px;
+        top: -180px;
+        padding: 18px;
+    }
+}
+
+/* ==========================================================================
+   ✨ 5 SIGNATURE ANIMATIONS (Ported from xiaopu-ai / web-design)
+   ========================================================================== */
+
+/* 1. Aurora Ambient Canvas */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-aurora-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.55;
+}
+
+/* 2. Shiny Metallic Text Sweep */
+.shiny-gradient {
+    background: linear-gradient(110deg, #10b981 0%, #34d399 25%, #ffffff 50%, #06b6d4 75%, #10b981 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shiny-sweep 6s linear infinite;
+    display: inline-block;
+}
+
+@keyframes shiny-sweep {
+    0% { background-position: 0% center; }
+    100% { background-position: 220% center; }
+}
+
+/* 3. 3D Tilt Card & Specular Glare (Skills) */
+.tilt-card {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    transition: transform 0.15s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.card-glare {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(circle 240px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.14), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.tilt-card:hover .card-glare {
+    opacity: 1;
+}
+
+/* 5. Magnetic CTA Buttons */
+.magnetic-btn {
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    display: inline-flex;
 }

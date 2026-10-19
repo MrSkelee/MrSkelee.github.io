@@ -26,7 +26,7 @@
     <!-- Navigation Header -->
     <header class="nav-header">
         <div class="container nav-container">
-            <a href="#" class="logo-area">
+            <a href="#" class="logo-area magnetic-btn">
                 <span class="logo-text">Mr<span>Skele</span></span>
             </a>
             <nav class="nav-links">
@@ -40,24 +40,27 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="container hero-container">
+        <!-- Aurora Ambient Canvas -->
+        <canvas id="hero-aurora" class="hero-aurora-canvas"></canvas>
+
+        <div class="container hero-container" style="position: relative; z-index: 1;">
             <div class="hero-content">
                 <div class="badge">
                     <span class="badge-dot"></span>
-                    <span>Disponibile per nuovi progetti</span>
+                    <span id="hero-badge-text" data-scramble="Disponibile per nuovi progetti">Disponibile per nuovi progetti</span>
                 </div>
-                <h1>Sviluppo idee.<br>Costruisco software.</h1>
+                <h1 class="hero-title-shiny">Sviluppo idee.<br><span class="shiny-gradient">Costruisco software.</span></h1>
                 <p class="hero-description">
                     Ciao! Sono MrSkele, uno sviluppatore di 17 anni e mi diverto a creare progetti.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">
+                    <a href="#projects" class="btn btn-primary magnetic-btn">
                         Scopri i miei progetti <i data-lucide="arrow-down"></i>
                     </a>
-                    <a href="#stats" class="btn btn-secondary">
+                    <a href="#stats" class="btn btn-secondary magnetic-btn">
                         <i data-lucide="award"></i> Stats & Badge
                     </a>
-                    <a href="https://github.com/MrSkelee" class="btn btn-secondary" target="_blank">
+                    <a href="https://github.com/MrSkelee" class="btn btn-secondary magnetic-btn" target="_blank" rel="noopener">
                         <i data-lucide="github"></i> Profilo GitHub
                     </a>
                 </div>
@@ -124,7 +127,7 @@
                         <h3 style="margin-bottom: 1.5rem;">TryHackMe</h3>
                         <img src="https://img.shields.io/badge/TryHackMe-MrSkele-B92025?style=for-the-badge" alt="TryHackMe Badge" style="max-width: 100%; border-radius: 8px; height: 35px;">
                     </a>
-                    <button onclick="toggleBadges('thm-badges', this)" style="color: #3b82f6; background: none; border: none; cursor: pointer; margin-top: 15px; font-family: inherit; font-size: 1rem; font-weight: 500; text-decoration: underline;">Mostra badge</button>
+                    <button onclick="toggleBadges('thm-badges', this)" style="color: var(--accent-primary); background: none; border: none; cursor: pointer; margin-top: 15px; font-family: inherit; font-size: 1rem; font-weight: 500; text-decoration: underline;">Mostra badge</button>
                 </div>
                 
                 <!-- Hack The Box Card -->
@@ -133,7 +136,7 @@
                         <h3 style="margin-bottom: 1.5rem;">Hack The Box</h3>
                         <img src="https://img.shields.io/badge/HackTheBox-MrSkele-9fe03c?logo=hackthebox&style=for-the-badge" alt="HackTheBox Badge" style="max-width: 100%; border-radius: 8px; height: 35px;">
                     </a>
-                    <button onclick="toggleBadges('htb-badges', this)" style="color: #3b82f6; background: none; border: none; cursor: pointer; margin-top: 15px; font-family: inherit; font-size: 1rem; font-weight: 500; text-decoration: underline;">Mostra badge</button>
+                    <button onclick="toggleBadges('htb-badges', this)" style="color: var(--accent-primary); background: none; border: none; cursor: pointer; margin-top: 15px; font-family: inherit; font-size: 1rem; font-weight: 500; text-decoration: underline;">Mostra badge</button>
                 </div>
             </div>
 
@@ -250,187 +253,240 @@
             </div>
         </section>
 
-        <!-- Projects Grid -->
-        <section id="projects" class="section">
-            <div class="section-header">
+        <!-- 3D Spherical Projects Showcase (Unified Dome Adaptation for Portfolio) -->
+        <section id="projects" class="section project-sphere-section">
+            <div class="section-header text-center" style="max-width: 840px; margin: 0 auto 20px auto;">
                 <div class="section-badge">
-                    <i data-lucide="sparkles"></i> Portfolio
+                    <i data-lucide="sparkles"></i> 3D Dome Portfolio
                 </div>
                 <h2>Progetti in Evidenza</h2>
-                <p class="section-subtitle">Una selezione di software, applicazioni desktop e strumenti sviluppati con
-                    focus su efficienza e sicurezza.</p>
+                <p class="section-subtitle">I miei progetti pubblici open-source.</p>
             </div>
 
-            <div class="card-grid">
-                <!-- vscode-ai-undo Card -->
-                <div class="card project-card">
-                    <div class="card-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <i data-lucide="rotate-ccw"></i>
+            <!-- 3D Spherical Stage Container -->
+            <div class="project-sphere-stage" id="projectSphereStage">
+                <div class="sphere-cinema-portal" id="sphereCinemaPortal"></div>
+                <div class="sphere-world" id="projectSphereWorld">
+                    <!-- 1. vscode-ai-undo Card -->
+                    <div class="card project-card sphere-card" data-index="0">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="rotate-ccw"></i>
+                        </div>
+                        <span class="project-tag">VS CODE EXTENSION / AI</span>
+                        <h3>vscode-ai-undo</h3>
+                        <p>Ctrl+Z for your AI coding agents: 1-click snapshot & rollback per Cursor, Claude Code, Copilot e Antigravity IDE. Cattura lo stato del codice prima di ogni prompt.</p>
+                        <div class="tech-badges">
+                            <span>TypeScript</span>
+                            <span>VS Code API</span>
+                            <span>AI Agents</span>
+                            <span>Snapshots</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/vscode-ai-undo" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
                     </div>
-                    <span class="project-tag">VS CODE EXTENSION / AI</span>
-                    <h3>vscode-ai-undo</h3>
-                    <p>Ctrl+Z for your AI coding agents: 1-click snapshot & rollback per Cursor, Claude Code, Copilot e Antigravity IDE. Cattura lo stato del codice prima di ogni prompt per ripristinarlo all'istante.</p>
-                    <div class="tech-badges">
-                        <span>TypeScript</span>
-                        <span>VS Code API</span>
-                        <span>AI Agents</span>
-                        <span>Rollback</span>
-                        <span>Snapshots</span>
-                    </div>
-                    <a href="https://github.com/MrSkelee/vscode-ai-undo" class="project-link" target="_blank">
-                        GitHub Repository <i data-lucide="external-link"></i>
-                    </a>
-                </div>
 
-                <!-- mcp-safe-db Card -->
-                <div class="card project-card">
-                    <div class="card-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <i data-lucide="database"></i>
+                    <!-- 2. mcp-safe-db Card -->
+                    <div class="card project-card sphere-card" data-index="1">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="database"></i>
+                        </div>
+                        <span class="project-tag">MCP SERVER / AI TOOL</span>
+                        <h3>mcp-safe-db</h3>
+                        <p>Zero-risk, strictly read-only SQL database inspector per agenti AI. Consente l'ispezione sicura di schemi e tabelle senza alterazioni accidentali.</p>
+                        <div class="tech-badges">
+                            <span>TypeScript</span>
+                            <span>MCP</span>
+                            <span>SQLite</span>
+                            <span>Read-Only</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/mcp-safe-db" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
                     </div>
-                    <span class="project-tag">MCP SERVER / AI TOOL</span>
-                    <h3>mcp-safe-db</h3>
-                    <p>Zero-risk, strictly read-only SQL database inspector per agenti AI (Claude, Antigravity, Cursor). Consente l'ispezione sicura di schemi e tabelle senza alcun rischio di alterazioni accidentali.</p>
-                    <div class="tech-badges">
-                        <span>TypeScript</span>
-                        <span>MCP</span>
-                        <span>SQLite</span>
-                        <span>AI Agents</span>
-                        <span>Read-Only</span>
-                    </div>
-                    <a href="https://github.com/MrSkelee/mcp-safe-db" class="project-link" target="_blank">
-                        GitHub Repository <i data-lucide="external-link"></i>
-                    </a>
-                </div>
 
-                <!-- QuantumPlay Card -->
-                <div class="card project-card">
-                    <div class="card-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <i data-lucide="gamepad-2"></i>
+                    <!-- 3. prompt-cache-lens Card -->
+                    <div class="card project-card sphere-card" data-index="2">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="zap"></i>
+                        </div>
+                        <span class="project-tag">AI DEV / OPTIMIZATION</span>
+                        <h3>prompt-cache-lens</h3>
+                        <p>LLM Prompt Cache Invalidation & Cost Leak Detector. Individua i punti esatti di rottura della cache ed elimina gli sprechi invisibili nelle chiamate API LLM.</p>
+                        <div class="tech-badges">
+                            <span>JavaScript</span>
+                            <span>AI Agents</span>
+                            <span>Prompt Caching</span>
+                            <span>Cost Optimization</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/prompt-cache-lens" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
                     </div>
-                    <span class="project-tag">DESKTOP APP</span>
-                    <h3>QuantumPlay</h3>
-                    <p>A premium, modern, and ultra-fast universal game launcher built with Electron, React, and
-                        TypeScript. Say goodbye to scattered game libraries and heavy launch clients.</p>
-                    <div class="tech-badges">
-                        <span>Electron</span>
-                        <span>React</span>
-                        <span>TypeScript</span>
-                        <span>Vite</span>
-                        <span>Vanilla CSS</span>
-                    </div>
-                    <a href="https://github.com/MrSkelee/QuantumPlay" class="project-link" target="_blank">
-                        GitHub Repository <i data-lucide="external-link"></i>
-                    </a>
-                </div>
 
-                <!-- PassMana Card -->
-                <div class="card project-card">
-                    <div class="card-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <i data-lucide="shield-check"></i>
+                    <!-- 4. git-trash Card -->
+                    <div class="card project-card sphere-card" data-index="3">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="trash-2"></i>
+                        </div>
+                        <span class="project-tag">CLI TOOL / GIT UTILITY</span>
+                        <h3>git-trash</h3>
+                        <p>The OS Recycle Bin for Git — sposta in sicurezza i file untracked e le modifiche scartate nel Cestino di sistema invece di distruggerli in modo irreversibile.</p>
+                        <div class="tech-badges">
+                            <span>TypeScript</span>
+                            <span>Node.js</span>
+                            <span>Git CLI</span>
+                            <span>Safety</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/git-trash" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
                     </div>
-                    <span class="project-tag">SECURITY / CRYPTO</span>
-                    <h3>PassMana</h3>
-                    <p>Pass Manager Zero-Knowledge. Un gestore di password sicuro ed offline-first per garantire la
-                        totale riservatezza e privacy delle proprie credenziali locali senza server di terze parti.</p>
-                    <div class="tech-badges">
-                        <span>React</span>
-                        <span>TypeScript</span>
-                        <span>Zero-Knowledge</span>
-                        <span>Web Crypto</span>
-                        <span>Local Storage</span>
-                    </div>
-                    <a href="https://github.com/MrSkelee/PassMana" class="project-link" target="_blank">
-                        GitHub Repository <i data-lucide="external-link"></i>
-                    </a>
-                </div>
 
-                <!-- StealthShell Card -->
-                <div class="card project-card">
-                    <div class="card-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <i data-lucide="terminal"></i>
+                    <!-- 5. segfault-lens Card -->
+                    <div class="card project-card sphere-card" data-index="4">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="bug"></i>
+                        </div>
+                        <span class="project-tag">SYSTEMS / C & C++</span>
+                        <h3>segfault-lens</h3>
+                        <p>Diagnostica istantanea dei crash in stile Rust, schermate di panic e stack trace dettagliate fino alla riga esatta di codice per programmi scritti in C e C++.</p>
+                        <div class="tech-badges">
+                            <span>C</span>
+                            <span>C++</span>
+                            <span>Systems</span>
+                            <span>Debugging</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/segfault-lens" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
                     </div>
-                    <span class="project-tag">PENTESTING TOOL</span>
-                    <h3>StealthShell</h3>
-                    <p>Crea una shell con una chiavetta digispark bypassando le difese di Windows 11. Script e payload
-                        strutturati per test di penetrazione fisica e automazione di compiti amministrativi.</p>
-                    <div class="tech-badges">
-                        <span>Digispark</span>
-                        <span>Payloads</span>
-                        <span>Windows 11</span>
-                        <span>AV Bypass</span>
-                        <span>DuckyScript</span>
-                    </div>
-                    <a href="https://github.com/MrSkelee/StealthShell-Win11-AV-Bypass-Digispark"
-                        class="project-link" target="_blank">
-                        GitHub Repository <i data-lucide="external-link"></i>
-                    </a>
-                </div>
 
-                <!-- InstaOSINT Card -->
-                <div class="card project-card">
-                    <div class="card-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <i data-lucide="search"></i>
+                    <!-- 6. QuantumPlay Card -->
+                    <div class="card project-card sphere-card" data-index="5">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="gamepad-2"></i>
+                        </div>
+                        <span class="project-tag">DESKTOP APP</span>
+                        <h3>QuantumPlay</h3>
+                        <p>Launcher universale moderno e scattante realizzato con Electron, React e TypeScript per gestire la propria libreria di giochi in un unico client leggero.</p>
+                        <div class="tech-badges">
+                            <span>Electron</span>
+                            <span>React</span>
+                            <span>TypeScript</span>
+                            <span>Vite</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/QuantumPlay" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
                     </div>
-                    <span class="project-tag">OSINT TOOL</span>
-                    <h3>InstaOSINT</h3>
-                    <p>Strumento leggero e performante ideato per scopi educativi ed OSINT, progettato per raccogliere e
-                        analizzare in modo trasparente dati pubblici da account Instagram.</p>
-                    <div class="tech-badges">
-                        <span>Python</span>
-                        <span>OSINT</span>
-                        <span>Reconnaissance</span>
-                        <span>API Scripting</span>
-                    </div>
-                    <a href="https://github.com/MrSkelee/InstaOSINT" class="project-link" target="_blank">
-                        GitHub Repository <i data-lucide="external-link"></i>
-                    </a>
-                </div>
 
-                <!-- TheLastCaretaker Multiplayer Mod Card -->
-                <div class="card project-card">
-                    <div class="card-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <i data-lucide="users"></i>
+                    <!-- 7. PassMana Card -->
+                    <div class="card project-card sphere-card" data-index="6">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="shield-check"></i>
+                        </div>
+                        <span class="project-tag">SECURITY / CRYPTO</span>
+                        <h3>PassMana</h3>
+                        <p>Password manager zero-knowledge, offline-first. Crittografia client-side basata su Web Crypto API per garantire la riservatezza delle credenziali.</p>
+                        <div class="tech-badges">
+                            <span>React</span>
+                            <span>TypeScript</span>
+                            <span>Zero-Knowledge</span>
+                            <span>Web Crypto</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/PassMana" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
                     </div>
-                    <span class="project-tag">GAME MOD</span>
-                    <h3>TheLastCaretaker_MultiplayerMod</h3>
-                    <p>Mod Co-Op multiplayer non ufficiale per The Last Caretaker. Gioca in modalità cooperativa con i tuoi amici senza interruzioni.</p>
-                    <div class="tech-badges">
-                        <span>Lua</span>
-                        <span>Game Modding</span>
-                        <span>Co-Op</span>
+
+                    <!-- 8. StealthShell Card -->
+                    <div class="card project-card sphere-card" data-index="7">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="terminal"></i>
+                        </div>
+                        <span class="project-tag">PENTESTING TOOL</span>
+                        <h3>StealthShell</h3>
+                        <p>Iniezione di reverse shell hardware con chiavetta Digispark su Windows 11. Script e payload strutturati per test di penetrazione fisica e security assessment.</p>
+                        <div class="tech-badges">
+                            <span>Digispark</span>
+                            <span>Payloads</span>
+                            <span>Windows 11</span>
+                            <span>AV Bypass</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/StealthShell-Win11-AV-Bypass-Digispark" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
                     </div>
-                    <a href="https://github.com/MrSkelee/TheLastCaretaker_MultiplayerMod" class="project-link" target="_blank">
-                        GitHub Repository <i data-lucide="external-link"></i>
-                    </a>
-                </div>
-                
-                                <!-- JabberJaw Card -->
-                <div class="card project-card">
-                    <div class="card-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <i data-lucide="router"></i>
+
+                    <!-- 9. InstaOSINT Card -->
+                    <div class="card project-card sphere-card" data-index="8">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="search"></i>
+                        </div>
+                        <span class="project-tag">OSINT TOOL</span>
+                        <h3>InstaOSINT</h3>
+                        <p>Strumento leggero e performante ideato per indagini OSINT ed analisi delle fonti aperte per raccogliere ed elaborare informazioni pubbliche sui profili.</p>
+                        <div class="tech-badges">
+                            <span>Python</span>
+                            <span>OSINT</span>
+                            <span>Reconnaissance</span>
+                            <span>API</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/InstaOSINT" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
                     </div>
-                    <span class="project-tag">HARDWARE / PENTESTING</span>
-                    <h3>JabberJaw</h3>
-                    <p>Pocket-Sized Network Auditing & Diagnostics Toolkit. Trasforma un router da viaggio (GL-AR300M) in uno strumento di pentesting plug-and-play autonomo con Web UI integrata e payload modulari.</p>
-                    <div class="tech-badges">
-                        <span>OpenWrt</span>
-                        <span>Shell Script</span>
-                        <span>Networking</span>
-                        <span>Vanilla JS</span>
+
+                    <!-- 10. TheLastCaretaker Multiplayer Mod Card -->
+                    <div class="card project-card sphere-card" data-index="9">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <span class="project-tag">GAME MOD</span>
+                        <h3>TheLastCaretaker_MultiplayerMod</h3>
+                        <p>Mod Co-Op multiplayer non ufficiale per The Last Caretaker. Consente di giocare in modalità cooperativa online con sessioni sincronizzate.</p>
+                        <div class="tech-badges">
+                            <span>Lua</span>
+                            <span>Game Modding</span>
+                            <span>Co-Op Networking</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/TheLastCaretaker_MultiplayerMod" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
                     </div>
-                    <a href="https://github.com/MrSkelee/JabberJaw" class="project-link" target="_blank">
-                        GitHub Repository <i data-lucide="external-link"></i>
-                    </a>
-                </div>
-            </div>
+                    
+                    <!-- 11. JabberJaw Card -->
+                    <div class="card project-card sphere-card" data-index="10">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <i data-lucide="router"></i>
+                        </div>
+                        <span class="project-tag">HARDWARE / PENTESTING</span>
+                        <h3>JabberJaw</h3>
+                        <p>Toolkit portatile di auditing e diagnostica di rete su hardware GL-AR300M. Sistema plug-and-play autonomo con Web UI integrata e payload modulari.</p>
+                        <div class="tech-badges">
+                            <span>OpenWrt</span>
+                            <span>Shell Script</span>
+                            <span>Networking</span>
+                            <span>Vanilla JS</span>
+                        </div>
+                        <a href="https://github.com/MrSkelee/JabberJaw" class="project-link" target="_blank" rel="noopener">
+                            GitHub Repository <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div> <!-- /sphere-world -->
+            </div> <!-- /project-sphere-stage -->
         </section>
 
         <!-- Skills Section -->
@@ -445,19 +501,22 @@
             </div>
 
             <div class="skills-grid">
-                <div class="card skill-card">
+                <div class="card skill-card tilt-card">
+                    <div class="card-glare"></div>
                     <div class="skill-icon"><i data-lucide="layout"></i></div>
                     <h3>Frontend & Desktop UI</h3>
                     <p>Progettazione di interfacce fluide con React, TypeScript e HTML/CSS moderni. Integrazione desktop
                         nativa tramite il framework Electron.</p>
                 </div>
-                <div class="card skill-card">
+                <div class="card skill-card tilt-card">
+                    <div class="card-glare"></div>
                     <div class="skill-icon"><i data-lucide="lock"></i></div>
                     <h3>Privacy & Security</h3>
                     <p>Implementazione di architetture zero-knowledge, gestione sicura di credenziali, cifratura dei
                         dati in locale e studio delle vulnerabilità di sistema.</p>
                 </div>
-                <div class="card skill-card">
+                <div class="card skill-card tilt-card">
+                    <div class="card-glare"></div>
                     <div class="skill-icon"><i data-lucide="cpu"></i></div>
                     <h3>Automazione & Scripting</h3>
                     <p>Sviluppo di script rapidi in Python e configurazioni DuckyScript per ottimizzare compiti e
@@ -509,18 +568,24 @@
                 parole?</p>
 
             <div class="cta-cards-grid">
-                <a href="https://t.me/MrSkele11" class="card contact-card" target="_blank">
-                    <div class="contact-icon telegram"><i data-lucide="send"></i></div>
+                <a href="https://t.me/MrSkele11" class="card contact-card" target="_blank" rel="noopener noreferrer">
+                    <div class="contact-icon telegram">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                    </div>
                     <h4>Telegram</h4>
                     <p>@MrSkele11</p>
                 </a>
-                <a href="https://github.com/MrSkelee" class="card contact-card" target="_blank">
-                    <div class="contact-icon github"><i data-lucide="github"></i></div>
+                <a href="https://github.com/MrSkelee" class="card contact-card" target="_blank" rel="noopener noreferrer">
+                    <div class="contact-icon github">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                    </div>
                     <h4>GitHub</h4>
                     <p>MrSkelee</p>
                 </a>
-                <a href="https://www.youtube.com/@MrSkeleRoot" class="card contact-card" target="_blank">
-                    <div class="contact-icon youtube"><i data-lucide="youtube"></i></div>
+                <a href="https://www.youtube.com/@MrSkeleRoot" class="card contact-card" target="_blank" rel="noopener noreferrer">
+                    <div class="contact-icon youtube">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg>
+                    </div>
                     <h4>YouTube</h4>
                     <p>@MrSkeleRoot</p>
                 </a>
@@ -550,8 +615,8 @@
             }
         }
     </script>
-    
-    <!-- Initialize Lucide Icons -->
+
+    <!-- Initialize Interactions -->
     <script src="script.js"></script>
 </body>
 
