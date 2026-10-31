@@ -518,4 +518,249 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     initMagneticButtons();
+
+    // ==========================================================================
+    // 5. ✨ ENHANCEMENT PACK v2 — 3D & Motion Surprises
+    // ==========================================================================
+    const reducedMotion = document.documentElement.classList.contains('reduced-motion');
+
+    // --- 5.1 Scroll Progress Bar (neon, top of viewport) ---
+    function initScrollProgress() {
+        const bar = document.getElementById('scroll-progress');
+        if (!bar) return;
+        let ticking = false;
+        function update() {
+            const doc = document.documentElement;
+            const max = doc.scrollHeight - window.innerHeight;
+            const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+            bar.style.transform = `scaleX(${p.toFixed(4)})`;
+            ticking = false;
+        }
+        window.addEventListener('scroll', () => {
+            if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        }, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+    }
+    initScrollProgress();
+
+    // --- 5.3 Interactive Cyber Particle Network (Hero canvas) ---
+    function initParticleNetwork() {
+        const canvas = document.getElementById('hero-particles');
+        if (!canvas || reducedMotion) return;
+        const ctx = canvas.getContext('2d');
+        const hero = canvas.closest('.hero-section');
+        if (!hero) return;
+
+        const DPR = Math.min(window.devicePixelRatio || 1, 2);
+        let W = 0, H = 0;
+        let particles = [];
+        let rafId = null;
+        const mouse = { x: -9999, y: -9999, inside: false };
+        const LINK_DIST = 120;
+        const MOUSE_DIST = 170;
+
+        function resize() {
+            const rect = hero.getBoundingClientRect();
+            W = rect.width; H = rect.height;
+            canvas.width = W * DPR;
+            canvas.height = H * DPR;
+            ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+            const count = Math.min(70, Math.floor((W * H) / 16000));
+            particles = Array.from({ length: count }, () => ({
+                x: Math.random() * W,
+                y: Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.35,
+                vy: (Math.random() - 0.5) * 0.35,
+                r: Math.random() * 1.6 + 0.6
+            }));
+        }
+
+        function frame() {
+            ctx.clearRect(0, 0, W, H);
+            for (const p of particles) {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > W) p.vx *= -1;
+                if (p.y < 0 || p.y > H) p.vy *= -1;
+
+                // Gentle attraction toward the cursor
+                if (mouse.inside) {
+                    const dx = mouse.x - p.x, dy = mouse.y - p.y;
+                    const d2 = dx * dx + dy * dy;
+                    if (d2 < MOUSE_DIST * MOUSE_DIST) {
+                        const d = Math.sqrt(d2) || 1;
+                        const f = 0.012 * (1 - d / MOUSE_DIST);
+                        p.vx += (dx / d) * f;
+                        p.vy += (dy / d) * f;
+                    }
+                }
+                // Speed clamp (keeps the field calm)
+                const sp = Math.hypot(p.vx, p.vy);
+                if (sp > 0.9) { p.vx = (p.vx / sp) * 0.9; p.vy = (p.vy / sp) * 0.9; }
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(110, 231, 183, 0.55)';
+                ctx.fill();
+            }
+
+            // Connecting lines (O(n²) on a small field is fine)
+            for (let i = 0; i < particles.length; i++) {
+                const a = particles[i];
+                for (let j = i + 1; j < particles.length; j++) {
+                    const b = particles[j];
+                    const dx = a.x - b.x, dy = a.y - b.y;
+                    const d = Math.hypot(dx, dy);
+                    if (d < LINK_DIST) {
+                        ctx.strokeStyle = `rgba(16, 185, 129, ${(0.28 * (1 - d / LINK_DIST)).toFixed(3)})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.stroke();
+                    }
+                }
+                // Line to the cursor
+                if (mouse.inside) {
+                    const dx = a.x - mouse.x, dy = a.y - mouse.y;
+                    const d = Math.hypot(dx, dy);
+                    if (d < MOUSE_DIST) {
+                        ctx.strokeStyle = `rgba(6, 182, 212, ${(0.35 * (1 - d / MOUSE_DIST)).toFixed(3)})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            rafId = requestAnimationFrame(frame);
+        }
+
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+            mouse.inside = true;
+        });
+        hero.addEventListener('mouseleave', () => { mouse.inside = false; });
+
+        resize();
+        window.addEventListener('resize', resize);
+        rafId = requestAnimationFrame(frame);
+
+        // Pause when the hero is off-screen or the tab is hidden
+        const io = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting && !document.hidden) {
+                if (rafId === null) rafId = requestAnimationFrame(frame);
+            } else {
+                if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+            }
+        }, { threshold: 0 });
+        io.observe(hero);
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+            } else if (rafId === null && hero.getBoundingClientRect().top < window.innerHeight) {
+                rafId = requestAnimationFrame(frame);
+            }
+        });
+    }
+    initParticleNetwork();
+
+    // --- 5.4 3D Holographic Tilt (Hero glass window) ---
+    function initGlassWindowTilt() {
+        const stage = document.querySelector('.tilt3d-stage');
+        const win = stage && stage.querySelector('.glass-window');
+        const hero = win && win.closest('.hero-section');
+        if (!stage || !win || !hero) return;
+        if (window.innerWidth < 900) return; // keep mobile clean
+
+        let raf = null;
+        let tx = 0, ty = 0; // target rotations
+
+        function apply() {
+            // Base pose from CSS: rotateY(-6deg) rotateX(4deg)
+            const ry = (-6 + tx * 8).toFixed(2);
+            const rx = (4 - ty * 8).toFixed(2);
+            win.style.transform = `rotateY(${ry}deg) rotateX(${rx}deg)`;
+            raf = null;
+        }
+
+        hero.addEventListener('mousemove', (e) => {
+            const rect = stage.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const max = Math.max(rect.width, rect.height);
+            tx = Math.max(-1, Math.min(1, (e.clientX - cx) / max));
+            ty = Math.max(-1, Math.min(1, (e.clientY - cy) / max));
+            if (raf === null) raf = requestAnimationFrame(apply);
+        });
+
+        hero.addEventListener('mouseleave', () => {
+            tx = 0; ty = 0;
+            win.style.transform = 'rotateY(-6deg) rotateX(4deg)';
+            if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+        });
+    }
+    initGlassWindowTilt();
+
+    // --- 5.5 Tech Marquee (seamless infinite loop) ---
+    function initMarquee() {
+        const marquee = document.querySelector('.marquee');
+        const tracks = document.querySelectorAll('.marquee-track');
+        if (!marquee || tracks.length === 0) return;
+        if (reducedMotion) {
+            document.documentElement.classList.remove('marquee-active');
+            return;
+        }
+        // Duplicate content in both tracks so each track is at least 1.5x the screen width
+        const first = tracks[0];
+        let guard = 0;
+        while (first.scrollWidth < marquee.clientWidth * 1.5 && guard < 5) {
+            tracks.forEach(t => { t.innerHTML += t.innerHTML; });
+            guard++;
+        }
+    }
+    initMarquee();
+
+    // --- 5.6 Skeleton Easter Egg (press "S") + parallax ---
+    function initSkeletonEgg() {
+        const skull = document.getElementById('floating-skull');
+        if (!skull) return;
+
+        // Parallax drift while the hero is visible
+        if (!reducedMotion) {
+            const hero = skull.closest('.hero-section');
+            if (hero) {
+                hero.addEventListener('mousemove', (e) => {
+                    const nx = e.clientX / window.innerWidth - 0.5;
+                    const ny = e.clientY / window.innerHeight - 0.5;
+                    skull.style.translate = `${(nx * -14).toFixed(1)}px ${(ny * -10).toFixed(1)}px`;
+                });
+            }
+        }
+
+        let burstCooldown = false;
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() !== 's' || e.metaKey || e.ctrlKey || e.altKey) return;
+            const target = e.target;
+            if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
+            if (burstCooldown) return;
+            burstCooldown = true;
+
+            skull.classList.add('skull-burst');
+            setTimeout(() => {
+                skull.classList.remove('skull-burst');
+                burstCooldown = false;
+            }, 1400);
+        });
+    }
+    initSkeletonEgg();
+
+    // --- 5.7 Tab-hidden pause (heavy canvas animations) ---
+    document.addEventListener('visibilitychange', () => {
+        document.body.setAttribute('data-paused', document.hidden ? 'true' : 'false');
+    });
 });

@@ -12,9 +12,20 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Pre-paint critical classes (scrollbar, progress bar, marquee, easter egg) to avoid flash of wrong styles
+        document.documentElement.setAttribute('data-theme', 'emerald');
+        document.documentElement.classList.add('progress-bar-active', 'marquee-active', 'skeleton-egg-on');
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('reduced-motion');
+        }
+    </script>
 </head>
 
 <body>
+
+    <!-- Scroll Progress Bar (neon, top of viewport) -->
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
     <!-- Ambient Glow Effects -->
     <div class="glow-container">
@@ -42,6 +53,8 @@
     <section class="hero-section">
         <!-- Aurora Ambient Canvas -->
         <canvas id="hero-aurora" class="hero-aurora-canvas"></canvas>
+        <!-- Interactive Cyber Particle Network -->
+        <canvas id="hero-particles" class="hero-particles-canvas" aria-hidden="true"></canvas>
 
         <div class="container hero-container" style="position: relative; z-index: 1;">
             <div class="hero-content">
@@ -66,9 +79,13 @@
                 </div>
             </div>
 
+            <!-- Easter Egg: 3D floating skeleton head (press "S") -->
+            <div class="floating-skull" id="floating-skull" aria-hidden="true">💀</div>
+
             <!-- Sleek Glassmorphic Mockup Container (Showcase UI) -->
             <div class="showcase-wrapper">
-                <div class="glass-window">
+                <div class="tilt3d-stage">
+                    <div class="glass-window">
                     <div class="window-header">
                         <div class="window-dots">
                             <span class="dot dot-red"></span>
@@ -102,9 +119,30 @@
                         <div class="code-line output-line">> Running build checks... Done. [OK]</div>
                     </div>
                 </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Tech Marquee: infinite neon ticker -->
+    <div class="marquee-section" aria-label="Tecnologie che utilizzo">
+        <div class="marquee">
+            <div class="marquee-track">
+                <span>TypeScript</span><span class="marquee-sep">✦</span><span>Electron</span><span class="marquee-sep">✦</span>
+                <span>MCP Server</span><span class="marquee-sep">✦</span><span>Node.js</span><span class="marquee-sep">✦</span>
+                <span>Python</span><span class="marquee-sep">✦</span><span>Linux</span><span class="marquee-sep">✦</span>
+                <span>WebAssembly</span><span class="marquee-sep">✦</span><span>SQLite</span><span class="marquee-sep">✦</span>
+                <span>REST API</span><span class="marquee-sep">✦</span><span>Penetration Testing</span><span class="marquee-sep">✦</span>
+            </div>
+            <div class="marquee-track" aria-hidden="true">
+                <span>TypeScript</span><span class="marquee-sep">✦</span><span>Electron</span><span class="marquee-sep">✦</span>
+                <span>MCP Server</span><span class="marquee-sep">✦</span><span>Node.js</span><span class="marquee-sep">✦</span>
+                <span>Python</span><span class="marquee-sep">✦</span><span>Linux</span><span class="marquee-sep">✦</span>
+                <span>WebAssembly</span><span class="marquee-sep">✦</span><span>SQLite</span><span class="marquee-sep">✦</span>
+                <span>REST API</span><span class="marquee-sep">✦</span><span>Penetration Testing</span><span class="marquee-sep">✦</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Container -->
     <main class="container">

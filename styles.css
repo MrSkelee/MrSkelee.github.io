@@ -1294,3 +1294,160 @@ footer strong {
     will-change: transform;
     display: inline-flex;
 }
+
+/* ==========================================================================
+   ✨ ENHANCEMENT PACK v2 — 3D & Motion Surprises
+   ========================================================================== */
+
+/* --- 1. Scroll Progress Bar (neon) --- */
+html.progress-bar-active {
+    scrollbar-color: rgba(16, 185, 129, 0.35) transparent;
+}
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 9999;
+    transform-origin: 0 0;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, #10b981, #06b6d4, #34d399);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.7), 0 0 4px rgba(6, 182, 212, 0.8);
+    pointer-events: none;
+}
+
+/* --- 3. Interactive Cyber Particle Network (Hero) --- */
+.hero-particles-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.65;
+}
+
+/* --- 4. 3D Holographic Tilt Stage (Hero mockup window) --- */
+.tilt3d-stage {
+    transform-style: preserve-3d;
+    perspective: 1400px;
+    display: block;
+}
+
+.tilt3d-stage .glass-window {
+    transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+    will-change: transform;
+}
+
+/* --- 5. Tech Marquee (infinite neon ticker) --- */
+.marquee-section {
+    overflow: hidden;
+    padding: 18px 0;
+    border-top: 1px solid rgba(16, 185, 129, 0.12);
+    border-bottom: 1px solid rgba(16, 185, 129, 0.12);
+    background: linear-gradient(180deg, rgba(7, 12, 18, 0.3), rgba(2, 4, 6, 0.6));
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+html.marquee-active .marquee {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    user-select: none;
+}
+
+.marquee-track {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 2.2rem;
+    padding-right: 2.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    white-space: nowrap;
+    will-change: transform;
+}
+
+html.marquee-active .marquee-track {
+    animation: marquee-scroll 28s linear infinite;
+}
+
+.marquee-track span {
+    color: var(--text-secondary);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.marquee-track span:hover {
+    color: #6ee7b7;
+    text-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
+}
+
+.marquee-sep {
+    color: #10b981 !important;
+    opacity: 0.7;
+    font-size: 0.7rem;
+}
+
+@keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+/* --- 6. Floating 3D Skeleton Head (easter egg) --- */
+.floating-skull {
+    position: absolute;
+    top: 12%;
+    right: 6%;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    z-index: 2;
+    pointer-events: none;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    will-change: transform;
+    filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.55)) drop-shadow(0 0 40px rgba(6, 182, 212, 0.3));
+    animation: skull-bob 5s ease-in-out infinite;
+}
+
+@keyframes skull-bob {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+    50% { transform: translate3d(0, -16px, 0) rotate(5deg); }
+}
+
+/* Digital rain burst triggered by pressing "S" */
+html.skeleton-egg-on .floating-skull.skull-burst {
+    animation: skull-burst 1.4s cubic-bezier(0.2, 0.9, 0.3, 1.2) 1;
+    filter: drop-shadow(0 0 24px rgba(16, 185, 129, 0.95)) drop-shadow(0 0 60px rgba(6, 182, 212, 0.6));
+}
+
+@keyframes skull-burst {
+    0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    30% { transform: translate3d(0, -42px, 0) rotate(-18deg) scale(1.35); }
+    60% { transform: translate3d(0, 10px, 0) rotate(12deg) scale(1.08); }
+    100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+}
+
+/* --- 7. Reduced-motion safety net (also set pre-paint in <head>) --- */
+html.reduced-motion *,
+html.reduced-motion *::before,
+html.reduced-motion *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+}
+
+html.reduced-motion .marquee-track {
+    animation: none !important;
+}
+
+/* --- 8. Performance: pause heavy animations when tab is hidden --- */
+body[data-paused="true"] .hero-aurora-canvas,
+body[data-paused="true"] .hero-particles-canvas,
+body[data-paused="true"] .floating-skull {
+    animation-play-state: paused !important;
+}
